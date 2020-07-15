@@ -1,0 +1,44 @@
+.Page {
+  width:100vw;
+  height:100vh;
+  position: fixed;
+
+  margin:0;
+}
+
+.titleContent {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  height:30px;
+
+  background-color: beige;
+
+}
+
+.bodyContent {
+  display:flex;
+  flex-direction:row;
+  flex-grow: 1;
+  height:100%;
+}
+
+.bodyContent > .sidebarContent{
+  display:flex;
+  flex-direction: column;
+
+  border: 2px solid lightgray;
+
+  width: 30%;
+}
+
+.bodyContent > .mainContent{
+  display:flex;
+  flex-direction: column;
+
+  border: 2px solid lightgray;
+
+  width: 100%;
+}
+
