@@ -1,0 +1,11 @@
+Collecting RPi.GPIO
+  Using cached RPi.GPIO-0.7.0.tar.gz (30 kB)
+Requirement already satisfied: pip in c:\users\yarwi\projects\raspiinterface\rpi-venv\lib\site-packages (20.1.1)
+Collecting freeze
+  Downloading freeze-3.0.tar.gz (188 kB)
+Requirement already satisfied: six in c:\users\yarwi\projects\raspiinterface\rpi-venv\lib\site-packages (from freeze) (1.15.0)
+Using legacy setup.py install for RPi.GPIO, since package 'wheel' is not installed.
+Using legacy setup.py install for freeze, since package 'wheel' is not installed.
+Installing collected packages: RPi.GPIO, freeze
+    Running setup.py install for RPi.GPIO: started
+    Running setup.py install for RPi.GPIO: finished with status 'canceled'
