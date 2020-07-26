@@ -1,0 +1,7 @@
+.wrapInputRow{
+    display: flex;
+    flex-direction: row;
+    height: 1rem;
+    justify-content: space-between;
+    padding: .3rem .5rem;
+}
