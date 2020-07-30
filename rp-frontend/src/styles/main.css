@@ -1,0 +1,14 @@
+.list-item{
+    flex-direction: column;
+}
+
+.row-dimension{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .3rem .5rem;
+}
+
+.input-dimension{
+    padding: 5px 0 
+}

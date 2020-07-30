@@ -1,13 +1,13 @@
 import React from 'react';
 import './styles/App.css';
 
-import {Board} from './components/board';
+import {Main} from './views/Main';
 
 const App = () => {
   return (
     <div className="Page">
       <div className="titleContent">Titlebar</div>
-      <Board/>
+      <Main/>
     </div>
   );
 }

@@ -1,39 +1,38 @@
-import React, {useState} from 'react';
+import React from 'react';
+import { Stage, Layer, Circle } from 'react-konva';
 
 import '../styles/board.css'
 
-export const Board = () => {
-    const [boardDimX, setBoardDimX] = useState<number>(0)
-    const [boardDimY, setBoardDimY] = useState<number>(0)
-
-    const inputDimX = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setBoardDimX(parseInt(event.target.value))
-    }
-
-    const inputDimY = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setBoardDimY(parseInt(event.target.value))
-    }
-    
+interface BoardProps {
+    dimX : number;
+    dimY: number;
+}
+export const Board = ({dimX, dimY}: BoardProps) => {
+    console.log(dimX, dimY)
 
     return(
-        <div className="bodyContent">
-            <div className="sidebarContent">
-                <div className="wrapInputRow">
-                    <input
-                        type="number" 
-                        value={boardDimX} 
-                        onChange={inputDimX}
-                    />
-                    <input
-                        type="number" 
-                        value={boardDimY} 
-                        onChange={inputDimY}
-                    />
-                </div>
-            </div>
-            <div className="mainContent">
-                Main Body
-            </div>
+        <div className="board-wrap">
+            {/* @ts-ignore: Let's ignore a single compiler error like this unreachable code */}
+            <Stage height={600} width={800}>
+                {
+                    Array.from({length: dimX}, (x, i) => i).map((xVal)=>{
+                        return( 
+                            <Layer>
+                                {
+                                    Array.from({length: dimY}, (x, i) => i).map((yVal)=>{
+                                        return(
+                                            <Circle x={40*xVal + 30} y={40*yVal + 30} radius={10} fill="green" />
+                                        )
+                                    })
+                                }
+                            </Layer>
+                            
+                        )
+                    })
+                    
+                }
+            </Stage>
         </div>
+        
     )
 }
