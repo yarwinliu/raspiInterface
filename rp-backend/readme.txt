@@ -24,4 +24,13 @@ rpi_control.py:16: RuntimeWarning: This channel is already in use, continuing an
 192.168.0.17 - - [31/Jul/2020 20:19:58] "GET /25/off HTTP/1.1" 200 -
 
 
+In the client side, open the browser and point to the ip address of raspberrypi with port 8000:
+http://192.168.0.25:8000
 
+Device Listing and Status
+
+The pin24 is currently on (turn off)
+
+The pin25 is currently off (turn on)
+
+the pin23 is currently on (turn off)
