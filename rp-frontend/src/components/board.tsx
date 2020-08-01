@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import { Stage, Layer, Circle } from 'react-konva';
 
 import '../styles/board.css'
+
+import {getElements} from "../store/temp"
 
 interface BoardProps {
     dimX : number;
@@ -10,24 +12,21 @@ interface BoardProps {
 export const Board = ({dimX, dimY}: BoardProps) => {
     console.log(dimX, dimY)
 
+    const [toRender, setToRender] = useState<any>({})
+
+    useEffect(()=>{
+        getElements().then((elements) => {
+            setToRender(elements)
+        })
+    })
+
     return(
         <div className="board-wrap">
             {/* @ts-ignore: Ignore so ts-script wont mess with the height and width props */}
             <Stage height={600} width={800}>
                 {
-                    Array.from({length: dimX}, (x, i) => i).map((xVal)=>{
-                        return( 
-                            <Layer>
-                                {
-                                    Array.from({length: dimY}, (x, i) => i).map((yVal)=>{
-                                        return(
-                                            <Circle x={40*xVal + 30} y={40*yVal + 30} radius={10} fill="green" />
-                                        )
-                                    })
-                                }
-                            </Layer>
-                            
-                        )
+                    Object.keys(toRender).map((key) => {
+                        console.log(toRender[key])
                     })
                     
                 }
