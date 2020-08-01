@@ -1,7 +1,14 @@
+import sys
+print(sys.path)
+
+import flask_cors
 import RPi.GPIO as GPIO
+from flask_cors import CORS
+
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
+CORS(app)
 GPIO.setmode(GPIO.BCM)
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
@@ -61,7 +68,7 @@ def action(changePin, action):
 
    return render_template('main.html', **templateData)
 
-@app.route('/api_request/get_pins/', ["GET"])
+@app.route('/api_request/get_pins/', methods=["GET"])
 def getPins():
    if request.method == "GET":
       return jsonify(pins)
