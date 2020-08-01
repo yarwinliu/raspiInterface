@@ -16,7 +16,7 @@ export const Board = ({dimX, dimY}: BoardProps) => {
 
     useEffect(()=>{
         getElements().then((elements) => {
-            setToRender(elements)
+            console.log(elements)
         })
     })
 
