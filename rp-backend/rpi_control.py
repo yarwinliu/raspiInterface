@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 GPIO.setmode(GPIO.BCM)
@@ -60,6 +60,28 @@ def action(changePin, action):
    }
 
    return render_template('main.html', **templateData)
+
+@app.route('/api_request/get_pins/', ["GET"])
+def getPins():
+   if request.method == "GET":
+      return jsonify(pins)
+
+@app.route('/api_request/<changePin>/<action>')
+def apiGetAction(changePin, action):
+   # Convert the pin from the URL into an integer:
+   changePin = int(changePin)
+   
+   # If the action part of the URL is "on," execute the code indented below:
+   if action == "on":
+      # Set the pin high:
+      GPIO.output(changePin, GPIO.HIGH)
+   if action == "off":
+      GPIO.output(changePin, GPIO.LOW)
+   if action == "toggle":
+      # Read the pin and set it to whatever it isn't (that is, toggle it):
+      GPIO.output(changePin, not GPIO.input(changePin))
+
+   return jsonify(pins)
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=8000, debug=True)

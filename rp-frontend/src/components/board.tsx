@@ -12,7 +12,7 @@ export const Board = ({dimX, dimY}: BoardProps) => {
 
     return(
         <div className="board-wrap">
-            {/* @ts-ignore: Let's ignore a single compiler error like this unreachable code */}
+            {/* @ts-ignore: Ignore so ts-script wont mess with the height and width props */}
             <Stage height={600} width={800}>
                 {
                     Array.from({length: dimX}, (x, i) => i).map((xVal)=>{
