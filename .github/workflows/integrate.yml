@@ -6,13 +6,13 @@ on:
 jobs:
   test-build-ubuntu:
     runs-on: ubuntu-latest
+    env: 
+      working-directory: ./rp-frontend
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: ls
-      - run: cd rp-frontend
       - run: ls
       - run: yarn install --frozen-lockfile
       - run: yarn test
