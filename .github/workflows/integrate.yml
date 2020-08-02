@@ -1,0 +1,37 @@
+name: React Continuous Integration
+on: 
+  push:
+    branches: [ master ]
+
+jobs:
+  test-build-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+          with:
+            node-version: '12.x'
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: yarn start
+
+  test-build-window:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+          with:
+            node-version: '12.x'
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: yarn start
+  test-build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+          with:
+            node-version: '12.x'
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: yarn start
