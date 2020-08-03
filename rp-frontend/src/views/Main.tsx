@@ -1,7 +1,7 @@
 import React from 'react';
 
-import '../styles/Main.css'
-import { Board } from '../components/board';
+import 'styles/Main.css'
+import { Board } from 'components/board';
 import {  
     List,
 } from '@material-ui/core'

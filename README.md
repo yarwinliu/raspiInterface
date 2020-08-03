@@ -1,4 +1,6 @@
-![React Build Status](https://github.com/yarwinliu/raspiInterface/workflows/ReactCI/badge.svg)
+![React CI for Mac](https://github.com/yarwinliu/raspiInterface/workflows/ReactMacCI/badge.svg) ![React CI for Ubuntu](https://github.com/yarwinliu/raspiInterface/workflows/ReactUbuntuCI/badge.svg) ![React CI for Windows](https://github.com/yarwinliu/raspiInterface/workflows/ReactWindowsCI/badge.svg)
+
+
 
 # raspiInterface
 
@@ -9,15 +11,13 @@ This is a project to create a web interface to the RasberryPI.
 
 
 # Requestments
-npm, yarn
+* npm
+* yarn
+* python
+* raspberry pi
 
 # Technologies used
-## Frontend
-* React
-* Jest ( Via React-Scripts Test )
-* Redux
-* Redux Persist
-* Typescript
-
-## Backend
+* Github Actions
+* Axure (Mockups)
+* raspberry pi
 

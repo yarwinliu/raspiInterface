@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/board.css'
-import { getElements, toggleElement } from '../store/temp';
+import 'styles/board.css'
+import { getElements, toggleElement } from 'store/temp';
 
 import {Button} from "@material-ui/core"
 

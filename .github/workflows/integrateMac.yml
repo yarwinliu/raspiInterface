@@ -1,0 +1,19 @@
+name: ReactMacCI
+on: 
+  push:
+    branches: [ master ]
+
+jobs:
+  test-build-mac:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./rp-frontend
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: yarn build
