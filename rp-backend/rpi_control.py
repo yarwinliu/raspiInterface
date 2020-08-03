@@ -77,7 +77,7 @@ def getPins():
 def apiGetAction(changePin, action):
    # Convert the pin from the URL into an integer:
    changePin = int(changePin)
-   
+
    # If the action part of the URL is "on," execute the code indented below:
    if action == "on":
       # Set the pin high:
@@ -88,9 +88,10 @@ def apiGetAction(changePin, action):
       # Read the pin and set it to whatever it isn't (that is, toggle it):
       GPIO.output(changePin, not GPIO.input(changePin))
 
+   for pin in pins:
+      pins[pin]['state'] = GPIO.input(pin)
    return jsonify(pins)
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=8000, debug=True)
-
 
