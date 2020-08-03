@@ -1,4 +1,4 @@
-name: React Continuous Integration
+name: ReactCI
 on: 
   push:
     branches: [ master ]
