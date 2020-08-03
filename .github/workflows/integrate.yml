@@ -14,30 +14,34 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: ls
       - run: yarn install --frozen-lockfile
       - run: yarn test
-      - run: yarn start
+      - run: yarn build
 
-  # test-build-window:
-  #   runs-on: windows-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: '12.x'
-  #     - run: cd rp-frontend
-  #     - run: yarn install --frozen-lockfile
-  #     - run: yarn test
-  #     - run: yarn start
-  # test-build-mac:
-  #   runs-on: macos-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: '12.x'
-  #     - run: cd rp-frontend
-  #     - run: yarn install --frozen-lockfile
-  #     - run: yarn test
-  #     - run: yarn start
+  test-build-window:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./rp-frontend
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: yarn build
+
+  test-build-mac:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./rp-frontend
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: yarn build
