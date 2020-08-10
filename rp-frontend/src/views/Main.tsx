@@ -1,20 +1,15 @@
-import React from 'react';
+import React from 'react'
 
 import 'styles/Main.css'
-import { Board } from 'components/board';
-import {  
-    List,
-} from '@material-ui/core'
+import { Board, Sidebar } from 'components';
 
 export const Main = () => {
     return(
-        <div className="bodyContent">
-            <div className="sidebarContent">
-                <List>
-                </List>
-                
+        <div data-testid="main" className="body-content">
+            <div className="sidebar-content">
+                <Sidebar/>
             </div>
-            <div className="mainContent">
+            <div className="main-content">
                 <Board/>
             </div>
         </div>

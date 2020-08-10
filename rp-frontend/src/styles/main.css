@@ -1,3 +1,30 @@
+.body-content {
+    display:flex;
+    flex-direction:row;
+    flex-grow: 1;
+    height:100%;
+  }
+  
+  .body-content > .sidebar-content{
+    display:flex;
+    flex-direction: column;
+  
+    border: 2px solid lightgray;
+  
+    width: 30%;
+  }
+  
+  .body-content > .main-content{
+    display:flex;
+    flex-direction: column;
+  
+    border: 2px solid lightgray;
+  
+    width: 100%;
+  }
+  
+
+
 .list-item{
     flex-direction: column;
 }

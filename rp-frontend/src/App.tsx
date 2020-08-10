@@ -1,14 +1,20 @@
 import React from 'react';
+import { Provider } from 'react-redux'
+
+import { store } from 'store/store'
+
 import 'styles/App.css';
 
-import {Main} from './views/Main';
+import {Main} from 'views/Main';
 
 const App = () => {
   return (
-    <div className="Page">
-      <div className="titleContent">Titlebar</div>
-      <Main/>
-    </div>
+    <Provider store={store}>
+      <div className="Page">
+        <Main/>
+      </div>
+    </Provider>
+    
   );
 }
 
