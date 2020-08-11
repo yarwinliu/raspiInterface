@@ -3,6 +3,7 @@ import {AnyAction, Dispatch} from "redux"
 import {
     boardSetPins
 } from "store/ducks"
+import { boardSetNamePin, boardSetNameStatus } from "./Board"
 
 const CONFIG_SET_IP_ADDR = "config/SET_IP_ADRRESS"
 export const setIpAddr = (ipAddr: string) => {
@@ -23,11 +24,35 @@ export const setUpForIp = (url: string) => {
             })
             .then((json) => {
                 dispatch(boardSetPins(Object.keys(json).length))
-                console.log(json, json.length)
+                for(let i in Object.keys(json)){
+                    console.log(Number(i)   , Object.keys(json)[i], json[Object.keys(json)[i]])
+                    dispatch(boardSetNamePin(Number(i), Object.keys(json)[i]))
+                    dispatch(boardSetNameStatus(Number(i), json[Object.keys(json)[i]].state))
+                }
             })
             .catch((err) => {
                 console.log(err)
-                dispatch(boardSetPins(-1)) // ERR CODE
+                dispatch(boardSetPins(0)) // ERR CODE
+            })
+    }
+}
+
+export const togglePin = (url: string, pinNo: number) => {
+    return (dispatch: Dispatch) => {
+        return fetch(url + "api_request/" + pinNo + "/toggle")
+            .then((response) => {
+                return response.json()
+            })
+            .then((json) => {
+                dispatch(boardSetPins(Object.keys(json).length))
+                for(let i in Object.keys(json)){
+                    dispatch(boardSetNamePin(Number(i), Object.keys(json)[i]))
+                    dispatch(boardSetNameStatus(Number(i), json[Object.keys(json)[i]].state))
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+                dispatch(boardSetPins(0)) // ERR CODE
             })
     }
 }

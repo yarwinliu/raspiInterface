@@ -19,7 +19,7 @@ export const Sidebar = () => {
     const [value, setValue] = useState<number>(0);
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-        setValue(newValue);
+        setValue(Number(newValue));
     };
 
     return(
