@@ -5,7 +5,7 @@ import { Board, Sidebar } from 'components';
 
 export const Main = () => {
     return(
-        <div data-testid="main" className="body-content">
+        <div className="body-content">
             <div className="sidebar-content">
                 <Sidebar/>
             </div>
