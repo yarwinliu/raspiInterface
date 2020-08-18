@@ -1,2 +1,2 @@
 export * from "./board"
-export * from "./sidebar"
+export {SidebarLeft, SidebarRight} from "./sidebar"

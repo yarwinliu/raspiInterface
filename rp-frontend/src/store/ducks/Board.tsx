@@ -1,10 +1,10 @@
 // store/ducks/config.tsx -- This reducer is meant to store the configurations of each session (IP address/URL of the backend server, things like that, etc.)
 import {AnyAction} from "redux"
 
-const BOARD_SET_BOARD = "config/SET_BOARD"
+const BOARD_SET_BOARD_PINS = "config/SET_BOARD_PINS"
 export const boardSetPins = (numPins: number) => {
     return {
-        type: BOARD_SET_BOARD,
+        type: BOARD_SET_BOARD_PINS,
         payload: numPins
     }
 }
@@ -64,13 +64,20 @@ const initialState: Config = {
 
 }
 
+export const BoardActions = {
+    BOARD_SET_BOARD_PINS,
+    BOARD_SET_NAME,
+    BOARD_SET_LABEL,
+    BOARD_SET_STATUS,
+}
+
 export const BoardReducer = (state: Config = initialState, action:AnyAction = {type: ""}) => {
     switch(action.type){
-        case BOARD_SET_BOARD:
+        case BOARD_SET_BOARD_PINS:
             if(action.payload === 0){
                 return {...state, names: [], labels: [], statuses: [], numPins: action.payload}
             }
-            return {...state, names: Array(action.payload).fill(""), labels: Array(action.payload).fill(""), statuses: Array(action.payload).fill(0), numPins: action.payload}
+            return {...state, names: Array(action.payload).fill("UNSET"), labels: Array(action.payload).fill("UNSET"), statuses: Array(action.payload).fill(0), numPins: action.payload}
         case BOARD_SET_NAME:
             const newName = state.names
             newName[action.payload.key] = action.payload.value

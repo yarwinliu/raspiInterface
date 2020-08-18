@@ -84,6 +84,7 @@ export const Pin = (props: PinProps) => {
                 onClick={handlePinClick}
                 onMouseEnter={handlePinHover}
                 onMouseLeave={handlePinUnhover}
+                draggable
             />
             
         </React.Fragment>

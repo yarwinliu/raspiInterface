@@ -9,7 +9,7 @@ import { Snackbar, ListItemText } from "@material-ui/core"
 import { useTheme } from '@material-ui/core/styles';
 
 import 'styles/board.css'
-import { Pin } from './pin';
+import { Pin } from 'components/pin';
 
 export const Board = () => {
     const numPins: number = useSelector((state: RootState) => state.Board.numPins)

@@ -15,7 +15,7 @@ const sidebarControl = {
     EDITOR: 1,
 }
 
-export const Sidebar = () => {
+export const SidebarLeft = () => {
     const [value, setValue] = useState<number>(0);
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -36,6 +36,14 @@ export const Sidebar = () => {
 
         </div>
         
+    )
+}
+
+export const SidebarRight = () => {
+    return(
+        <div>
+            <p> SIDEBAR RIGHT</p>
+        </div>
     )
 }
 
