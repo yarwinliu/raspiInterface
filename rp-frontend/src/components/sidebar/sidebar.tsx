@@ -10,6 +10,8 @@ import {
     TextField,
 } from "@material-ui/core"
 
+import "styles/sidebar.css"
+
 const sidebarControl = {
     SETTING: 0,
     EDITOR: 1,
@@ -27,13 +29,13 @@ export const SidebarLeft = () => {
             <Tabs 
                 onChange={handleChange}
                 value={value}    
+                className={"tabs"}
                 centered 
             >
                 <Tab label="Settings"/>
                 <Tab label="Editor"/>
             </Tabs>
             <SidebarList value={value}/>
-
         </div>
         
     )
@@ -42,7 +44,9 @@ export const SidebarLeft = () => {
 export const SidebarRight = () => {
     return(
         <div>
-            <p> SIDEBAR RIGHT</p>
+            <p>
+                test
+            </p>
         </div>
     )
 }

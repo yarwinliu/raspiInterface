@@ -8,18 +8,23 @@
   .body-content > .sidebar-content{
     display:flex;
     flex-direction: column;
-  
-    border: 2px solid lightgray;
+
   
     width: 30%;
   }
+
+  .body-content > .sidebar-content.right{
+    border-left: 1px solid lightgray;
+
+  }
   
+  .body-content > .sidebar-content.left{
+    border-right: 1px solid lightgray;
+  }
+
   .body-content > .main-content{
     display:flex;
-    flex-direction: column;
-  
-    border: 2px solid lightgray;
-  
+    flex-direction: column; 
     width: 100%;
   }
   
