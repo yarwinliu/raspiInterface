@@ -3,76 +3,49 @@
 
 import React from 'react';
 import './rpi_main.css';
-import Pin from "./Pin";
-
-export class RpiMain extends React.Component {
+import PinNew,{PinParameters}  from "./PinNew";
+  
+class RpiMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
       isLoaded: false,
       items: {},
+      pins: {},
     }
-    
   }
   
-  componentDidMount() {
-    const url = "http://192.168.0.25:8080/api_request/12/on";
-    //console.log("componentDidMount,the url is " + url);
-    fetch(url)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          //console.log("print out the result");
-          //console.log(result["0"]);
-          //console.log(result[0]);
-          this.setState({
-            isLoaded: true,
-            items: result,
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          console.log("error fetch");
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
+  handleClick(parameters,clickButton) {
+    if(clickButton==="direction"){
+      alert("click button: pin number["+ parameters.pinNumber + "]," + "dirction[" + parameters.pinType + "]");
+    }
+    else if(clickButton==="pin"){
+      alert("click button: pin number["+ parameters.pinNumber + "]" );
+    }
+    else{
+      alert("click button: un-supported button type");
+    }
+
+    
   }
 
   render() {
-    //const { error, isLoaded, items } = this.state;
-    //const { items } = this.state;
-    //<div>Inside the pin testing: {Object.keys(items).length}</div>
-    //
+    let pinp1 = new PinParameters(this.handleClick,"left","7","4","IN","HIGH");
+    let pinp2 = new PinParameters(this.handleClick,"right","8","5","OUT","LOW");
     return (
       <table>
       <tbody>
-        <tr>
-          <Pin location="left" pinNumber="1"  pinType="3.3V"/>
-          <Pin location="right" pinNumber="2" pinType="5.0V"/>
-        </tr>
-        <tr>
-          <Pin location="left" pinNumber="3" gpioNumber="2" pinType="OUT" gpioLevel="HIGH"/>
-          <Pin location="right" pinNumber="4" pinType="5.0V"/>
-        </tr>
-        <tr>
-          <Pin location="left" pinNumber="5" gpioNumber="3" pinType="OUT" gpioLevel="HIGH"/>
-          <Pin location="right" pinNumber="6" pinType="GROUND"/>
-        </tr>
-        <tr>
-          <Pin location="left" pinNumber="7" gpioNumber="4" pinType="OUT" gpioLevel="LOW"/>
-          <Pin location="right" pinNumber="8" gpioNumber="5" pinType="OUT" gpioLevel="LOW"/>
-        </tr>
+      <tr>
+          <PinNew parameters={pinp1}/>
+          <PinNew parameters={pinp2}/>
+      </tr>
       </tbody>
       </table>
     );
-    
   }
+
+  
 }
 
 export default RpiMain;
