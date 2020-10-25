@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 //import Button from './components/Button/Button';
 //import {PinTest} from "./components/Pin";
-import RpiMain from "./components/Rpi_main";
+import RpiHeader from "./components/rpiHeader";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        <RpiMain information="Left and Right" />
+        <RpiHeader information="Left and Right" />
       </header>
     </div>
   );

@@ -1,10 +1,10 @@
-// Inside src/components/Rpi_main.js
+// Inside src/components/rpiHeader.js
 
 import React from 'react';
-import './rpi_main.css';
-import PinNew,{PinParameters}  from "./PinNew";
+import './pin.css';
+import Pin,{PinParameters}  from "./Pin";
   
-class RpiMain extends React.Component {
+class RpiHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -123,8 +123,8 @@ class RpiMain extends React.Component {
         const pinRight = pinPair[1];
         return (
           <tr key={index}>
-            <PinNew parameters={pinLeft}/>
-            <PinNew parameters={pinRight}/>
+            <Pin parameters={pinLeft}/>
+            <Pin parameters={pinRight}/>
           </tr>
         );
     });
@@ -139,4 +139,4 @@ class RpiMain extends React.Component {
   }
 }
 
-export default RpiMain;
+export default RpiHeader;

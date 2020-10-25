@@ -51,39 +51,9 @@ const PinTag = (props) =>
 /**
  * Primary UI component for user interaction
  */
-class BasePin extends React.Component {
-
-  getPinState=()=>{
-    alert("get pin state");
-    return (
-      <h2>get pin state</h2>
-    )
-  }
-
-  setPinState=(pinState)=>{
-    alert("set pin state" + pinState);
-    return (
-      <h2>set pin state {pinState}</h2>
-    )
-  }
-
-  togglePinState=()=>{
-    alert("toggle pin state, gpio: " + this.props.pinNumber);
-    return (
-      <h2>toggle pin state, gpio: {this.props.gpioNumber}</h2>
-    )
-  }
-
-  render(){
-    return (
-      <h2>BasePin class</h2>
-    )
-  }
-}
-
   //const LeftPin = ({ pinNumber, gpioNumber, pinType, gpioLevel, ...props }) => {
-  //class LeftPin extends React.Component {
-  class PinNew extends BasePin {
+  class Pin extends React.Component {
+  //class Pin extends BasePin {
     onClick(clickButton){
       this.props.parameters.handleClick(this.props.parameters,clickButton);
       //alert(clickButton);
@@ -244,4 +214,4 @@ class BasePin extends React.Component {
  *    LOW
 */
 
-export default PinNew;
+export default Pin;
