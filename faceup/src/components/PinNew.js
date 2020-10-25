@@ -4,7 +4,7 @@ import React from 'react';
 import './pin.css';
 
 export class PinParameters {
-  constructor(handleClick,location,pinNumber,gpioNumber,pinType,gpioLevel) {
+  constructor(handleClick,location,pinNumber,gpioNumber,pinType,gpioLevel)  {
     this._handleClick = handleClick;
     this._location = location;
     this._pinNumber = pinNumber;
@@ -20,6 +20,9 @@ export class PinParameters {
   get location() {
     return this._location;
   }
+  set location(x) {
+    this._location = x;
+  }
   get pinNumber() {
     return this._pinNumber;
   }
@@ -29,8 +32,14 @@ export class PinParameters {
   get pinType() {
     return this._pinType;
   }
+  set pinType(x) {
+    this._pinType = x;
+  }
   get gpioLevel() {
     return this._gpioLevel;
+  }
+  set gpioLevel(x) {
+    this._gpioLevel = x;
   }
 }
 

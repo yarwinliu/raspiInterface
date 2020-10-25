@@ -11,17 +11,50 @@ class RpiMain extends React.Component {
       error: null,
       isLoaded: false,
       items: {},
-      pins: [],
     }
 
     /* define pins: */
     /* pinNumber, gpioNumber, pinType, gpioLevel */
     this.pinData = [
       [["7","4","IN","HIGH"],["8","5","OUT","LOW"]],
-      [["9","6","IN","HIGH"],["10","7","OUT","LOW"]],
     ];
+    //[["9","6","IN","HIGH"],["10","7","OUT","LOW"]],
+
+    /* define url */
+    this.url = "http://192.168.0.25:8080/api_request/12/on";
+
+    this.isRendered = false;
+    this.pins = [];
   }
   
+  componentDidMount() {
+    const url = this.url;
+    //console.log("componentDidMount,the url is " + url);
+    fetch(url)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          //console.log("print out the result");
+          //console.log(result["0"]);
+          //console.log(result[0]);
+          this.setState({
+            isLoaded: true,
+            items: result,
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          console.log("error fetch");
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
   handleClick(parameters,clickButton) {
     if(clickButton==="direction"){
       alert("click button: pin number["+ parameters.pinNumber + "],dirction[" + parameters.pinType + "]");
@@ -35,17 +68,57 @@ class RpiMain extends React.Component {
   }
 
   render() {
-    for (var i = 0; i < this.pinData.length; i++) {
-      //console.log(this.pinData[i][0]);
-      let pl = this.pinData[i][0];
-      let pr = this.pinData[i][1];
-      let pinLeft = new PinParameters(this.handleClick,"left",pl[0],pl[1],pl[2],pl[3]);
-      let pinRight = new PinParameters(this.handleClick,"right",pr[0],pr[1],pr[2],pr[3]);
-      let pinPair = [pinLeft,pinRight];
-      this.state.pins.push(pinPair);
+    if(this.isRendered===false){
+      for (var i = 0; i < this.pinData.length; i++) {
+        //console.log(this.pinData[i][0]);
+        let pl = this.pinData[i][0];
+        let pr = this.pinData[i][1];
+        let pinLeft = new PinParameters(this.handleClick,"left",pl[0],pl[1],pl[2],pl[3]);
+        let pinRight = new PinParameters(this.handleClick,"right",pr[0],pr[1],pr[2],pr[3]);
+        let pinPair = [pinLeft,pinRight];
+        this.pins.push(pinPair);
+        this.isRendered = true;
+      }
     }
 
-    const pinArray = this.state.pins.map((pinPair,index) => {
+    if(this.state.isLoaded===true){
+      const { items } = this.state;
+      //<div>Inside the pin testing: {Object.keys(items).length}</div>
+      console.log("data loaded, received data length: " + Object.keys(items).length);
+      console.log("pin data length: " + this.pins.length);
+      for(i=0;i<Object.keys(items).length;++i){
+        //console.log(items[i].name);
+        for(var j=0;j<this.pins.length;++j)
+        {
+          let pinLeft = this.pins[j][0];
+          let pinRight = this.pins[j][1];
+          //console.log(pinLeft.pinNumber);
+          if(parseInt(pinLeft.pinNumber)===i){
+            console.log("left pin match",i,items[i].state);
+            if(items[i].state===0){
+              pinLeft.gpioLevel="LOW";
+            }
+            else if(items[i].state===1){
+              pinLeft.gpioLevel="HIGH";
+            }
+          }
+          if(parseInt(pinRight.pinNumber)===i){
+            console.log("right pin match",i,items[i].state);
+            if(items[i].state===0){
+              pinRight.gpioLevel="LOW";
+            }
+            else if(items[i].state===1){
+              pinRight.gpioLevel="HIGH";
+            }
+          }
+        }
+      }
+      
+      //update pins array with loaded data in items 
+
+    }
+
+    const pinArray = this.pins.map((pinPair,index) => {
         const pinLeft = pinPair[0];
         const pinRight = pinPair[1];
         return (
