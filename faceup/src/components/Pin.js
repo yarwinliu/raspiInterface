@@ -107,7 +107,7 @@ const PinTag = (props) =>
 
     left_pin_render2=(functionID,pinType,descID,functionNumber,pinLevel,gpioID,pinNumber,pinMode)=>
     {
-      var pinLevel = "HIGH";
+      //var pinLevel = "HIGH";
       if(pinType==="GROUND")
       {
         pinLevel = "LOW";
@@ -152,7 +152,7 @@ const PinTag = (props) =>
 
     right_pin_render2=(functionID,pinType,descID,functionNumber,pinLevel,gpioID,pinNumber,pinMode)=>
     {
-      var pinLevel = "HIGH";
+      //var pinLevel = "HIGH";
       if(pinType==="GROUND")
       {
         pinLevel = "LOW";
