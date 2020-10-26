@@ -13,9 +13,27 @@ GPIO.setmode(GPIO.BCM)
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
-   23 : {'name' : 'pin23', 'state' : GPIO.LOW},
-   24 : {'name' : 'pin24', 'state' : GPIO.LOW},
-   25 : {'name' : 'pin25', 'state' : GPIO.LOW}
+    0 : {'name' : 'pin27', 'state' : GPIO.LOW},
+    1 : {'name' : 'pin28', 'state' : GPIO.LOW},
+    2 : {'name' : 'pin3', 'state' : GPIO.LOW},
+    3 : {'name' : 'pin5', 'state' : GPIO.LOW},
+    4 : {'name' : 'pin7', 'state' : GPIO.LOW},
+    5 : {'name' : 'pin29', 'state' : GPIO.LOW},
+    6 : {'name' : 'pin31', 'state' : GPIO.LOW},
+
+    7 : {'name' : 'pin26', 'state' : GPIO.LOW},
+    8 : {'name' : 'pin24', 'state' : GPIO.LOW},
+    9 : {'name' : 'pin21', 'state' : GPIO.LOW},
+   10 : {'name' : 'pin19', 'state' : GPIO.LOW},
+   11 : {'name' : 'pin23', 'state' : GPIO.LOW},
+   12 : {'name' : 'pin32', 'state' : GPIO.LOW},
+   13 : {'name' : 'pin33', 'state' : GPIO.LOW},
+   14 : {'name' : 'pin8', 'state' : GPIO.LOW},
+
+   15 : {'name' : 'pin10', 'state' : GPIO.LOW},
+   16 : {'name' : 'pin36', 'state' : GPIO.LOW},
+   17 : {'name' : 'pin11', 'state' : GPIO.LOW},
+   18 : {'name' : 'pin12', 'state' : GPIO.LOW},
    }
 
 # Set each pin as an output and make it low:
@@ -93,5 +111,5 @@ def apiGetAction(changePin, action):
    return jsonify(pins)
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port=8000, debug=True)
+   app.run(host='0.0.0.0', port=8080, debug=True)
 
