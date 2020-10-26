@@ -14,9 +14,9 @@ class RpiHeader extends React.Component {
     }
 
     /* define pins: */
-    /* pinNumber, gpioNumber, pinType, gpioLevel */
+    /* pinNumber, functionNumber, pinType, pinMOde, pinLevel */
     this.pinData = [
-      [["7","4","IN","HIGH"],["8","5","OUT","LOW"]],
+      [["7","4","GPIO","IN","HIGH"],["8","5","GPIO","OUT","LOW"]],
     ];
     //[["9","6","IN","HIGH"],["10","7","OUT","LOW"]],
 
@@ -73,8 +73,8 @@ class RpiHeader extends React.Component {
         //console.log(this.pinData[i][0]);
         let pl = this.pinData[i][0];
         let pr = this.pinData[i][1];
-        let pinLeft = new PinParameters(this.handleClick,"left",pl[0],pl[1],pl[2],pl[3]);
-        let pinRight = new PinParameters(this.handleClick,"right",pr[0],pr[1],pr[2],pr[3]);
+        let pinLeft = new PinParameters(this.handleClick,"left",pl[0],pl[1],pl[2],pl[3],pl[4]);
+        let pinRight = new PinParameters(this.handleClick,"right",pr[0],pr[1],pr[2],pr[3],pr[4]);
         let pinPair = [pinLeft,pinRight];
         this.pins.push(pinPair);
         this.isRendered = true;
@@ -96,19 +96,19 @@ class RpiHeader extends React.Component {
           if(parseInt(pinLeft.pinNumber)===i){
             console.log("left pin match",i,items[i].state);
             if(items[i].state===0){
-              pinLeft.gpioLevel="LOW";
+              pinLeft.pinLevel="LOW";
             }
             else if(items[i].state===1){
-              pinLeft.gpioLevel="HIGH";
+              pinLeft.pinLevel="HIGH";
             }
           }
           if(parseInt(pinRight.pinNumber)===i){
             console.log("right pin match",i,items[i].state);
             if(items[i].state===0){
-              pinRight.gpioLevel="LOW";
+              pinRight.pinLevel="LOW";
             }
             else if(items[i].state===1){
-              pinRight.gpioLevel="HIGH";
+              pinRight.pinLevel="HIGH";
             }
           }
         }

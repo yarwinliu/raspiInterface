@@ -3,14 +3,38 @@ import React from 'react';
 
 import './pin.css';
 
+/*****************************************************
+ * Pin parameters:
+ * location:
+ *    left
+ *    right
+ * pinNumber: 1 - 50?
+ * functionNumber: 1 - 30?  (if pinType is GPIO this is gpio number)
+ * pinType:
+ *    GPIO
+ *    IN
+ *    OUT
+ *    GROUND
+ *    3.3V
+ *    5V
+ *    UART TX
+ *    UART RX
+ * pinMode: (state)
+ *    IN
+ *    OUT
+ * pinLevel: (state)
+ *    HIGH
+ *    LOW
+*/
 export class PinParameters {
-  constructor(handleClick,location,pinNumber,gpioNumber,pinType,gpioLevel)  {
+  constructor(handleClick,location,pinNumber,functionNumber,pinType,pinMode,pinLevel)  {
     this._handleClick = handleClick;
     this._location = location;
     this._pinNumber = pinNumber;
-    this._gpioNumber = gpioNumber;
+    this._functionNumber = functionNumber;
     this._pinType = pinType;
-    this._gpioLevel = gpioLevel;
+    this._pinMode = pinMode;
+    this._pinLevel = pinLevel;
   }
 
   get handleClick() {
@@ -26,8 +50,8 @@ export class PinParameters {
   get pinNumber() {
     return this._pinNumber;
   }
-  get gpioNumber() {
-    return this._gpioNumber;
+  get functionNumber() {
+    return this._functionNumber;
   }
   get pinType() {
     return this._pinType;
@@ -35,11 +59,17 @@ export class PinParameters {
   set pinType(x) {
     this._pinType = x;
   }
-  get gpioLevel() {
-    return this._gpioLevel;
+  get pinMode() {
+    return this._pinMode;
   }
-  set gpioLevel(x) {
-    this._gpioLevel = x;
+  set pinMode(x) {
+    this._pinMode = x;
+  }
+  get pinLevel() {
+    return this._pinLevel;
+  }
+  set pinLevel(x) {
+    this._pinLevel = x;
   }
 }
 
@@ -51,7 +81,6 @@ const PinTag = (props) =>
 /**
  * Primary UI component for user interaction
  */
-  //const LeftPin = ({ pinNumber, gpioNumber, pinType, gpioLevel, ...props }) => {
   class Pin extends React.Component {
   //class Pin extends BasePin {
     onClick(clickButton){
@@ -59,24 +88,24 @@ const PinTag = (props) =>
       //alert(clickButton);
     }
 
-    left_pin_render1=(functionID,pinType,descID,gpioNumber,gpioLevel,gpioID,pinNumber)=>
+    left_pin_render1=(functionID,pinType,descID,functionNumber,pinLevel,gpioID,pinNumber,pinMode)=>
     {
       return (
         <PinTag>
           <td align="center">
-              <button type="button" className="FunctionBasic" id={functionID} value={pinType} onClick={this.onClick.bind(this,"direction")}>{pinType}</button>
+              <button type="button" className="FunctionBasic" id={functionID} value={pinType} onClick={this.onClick.bind(this,"direction")}>{pinMode}</button>
           </td>
           <td align="right">
-              <div className="Description" id={descID}>GPIO {gpioNumber}</div>
+              <div className="Description" id={descID}>GPIO {functionNumber}</div>
           </td>
           <td align="center">
-              <button type="button" className={gpioLevel} id={gpioID} onClick={this.onClick.bind(this,"pin")}>{pinNumber}</button>
+              <button type="button" className={pinLevel} id={gpioID} onClick={this.onClick.bind(this,"pin")}>{pinNumber}</button>
           </td>
         </PinTag> 
         )
     }
 
-    left_pin_render2=(functionID,pinType,descID,gpioNumber,gpioLevel,gpioID,pinNumber)=>
+    left_pin_render2=(functionID,pinType,descID,functionNumber,pinLevel,gpioID,pinNumber,pinMode)=>
     {
       var pinLevel = "HIGH";
       if(pinType==="GROUND")
@@ -95,7 +124,7 @@ const PinTag = (props) =>
         <PinTag>
           <td align="center"></td>
           <td align="right">
-              <div className="Description" id={descID}>{pinType}</div>
+              <div className="Description" id={descID}>{pinMode}</div>
           </td>
           <td align="center">
               <button type="button" className={pinLevel} id={gpioID} onClick={this.onClick.bind(this,"pin")}>{pinNumber}</button>
@@ -104,24 +133,24 @@ const PinTag = (props) =>
       )
     }
 
-    right_pin_render1=(functionID,pinType,descID,gpioNumber,gpioLevel,gpioID,pinNumber)=>
+    right_pin_render1=(functionID,pinType,descID,functionNumber,pinLevel,gpioID,pinNumber,pinMode)=>
     {
       return (
         <PinTag>
             <td align="center">
-                <button type="button" className={gpioLevel} id={gpioID} onClick={this.onClick.bind(this,"pin")}>{pinNumber}</button>
+                <button type="button" className={pinLevel} id={gpioID} onClick={this.onClick.bind(this,"pin")}>{pinNumber}</button>
             </td>
             <td align="left">
-                <div className="Description" id={descID}>GPIO {gpioNumber}</div>
+                <div className="Description" id={descID}>GPIO {functionNumber}</div>
             </td>
             <td align="center">
-                <button type="button" className="FunctionBasic" id={functionID} value={pinType} onClick={this.onClick.bind(this,"direction")}>{pinType}</button>
+                <button type="button" className="FunctionBasic" id={functionID} value={pinType} onClick={this.onClick.bind(this,"direction")}>{pinMode}</button>
             </td>       
           </PinTag> 
         )
     }
 
-    right_pin_render2=(functionID,pinType,descID,gpioNumber,gpioLevel,gpioID,pinNumber)=>
+    right_pin_render2=(functionID,pinType,descID,functionNumber,pinLevel,gpioID,pinNumber,pinMode)=>
     {
       var pinLevel = "HIGH";
       if(pinType==="GROUND")
@@ -142,7 +171,7 @@ const PinTag = (props) =>
               <button type="button" className={pinLevel} id={gpioID} onClick={this.onClick.bind(this,"pin")}>{pinNumber}</button>
           </td>
           <td align="left">
-              <div className="Description" id={descID}>{pinType}</div>
+              <div className="Description" id={descID}>{pinMode}</div>
           </td>
           <td align="center"></td>
         </PinTag>
@@ -150,39 +179,35 @@ const PinTag = (props) =>
     }
 
     render(){
-      const {location, pinNumber, gpioNumber, pinType, gpioLevel} = this.props.parameters;
-      //const descID = "description"+`${gpioNumber}`;
-      const descID = `description${gpioNumber}`;
-      const functionID = `function${gpioNumber}`;
-      const gpioID = `gpio${gpioNumber}`;
+      const {location, pinNumber, functionNumber, pinType, pinMode, pinLevel} = this.props.parameters;
+      //const descID = "description"+`${functionNumber}`;
+      const descID = `description${functionNumber}`;
+      const functionID = `function${functionNumber}`;
+      const gpioID = `gpio${functionNumber}`;
 
       //console.log("functionID:",descID);
       if(location==="left"){
         switch(pinType){
-          case 'OUT':
-          case 'IN':
           case 'GPIO':
-            return this.left_pin_render1(functionID,pinType,descID,gpioNumber,gpioLevel,gpioID,pinNumber);
+            return this.left_pin_render1(functionID,pinType,descID,functionNumber,pinLevel,gpioID,pinNumber,pinMode);
           case 'GROUND':
           case '--':
           case '3.3V':
           case '5.0V':  
-            return this.left_pin_render2(functionID,pinType,descID,gpioNumber,gpioLevel,gpioID,pinNumber);
+            return this.left_pin_render2(functionID,pinType,descID,functionNumber,pinLevel,gpioID,pinNumber,pinMode);
           default:
             return null;
         }
       }
       if(location==="right"){
         switch(pinType){
-          case 'OUT':
-          case 'IN':
           case 'GPIO':
-            return this.right_pin_render1(functionID,pinType,descID,gpioNumber,gpioLevel,gpioID,pinNumber);
+            return this.right_pin_render1(functionID,pinType,descID,functionNumber,pinLevel,gpioID,pinNumber,pinMode);
           case 'GROUND':
           case '--':
           case '3.3V':
           case '5.0V':  
-            return this.right_pin_render2(functionID,pinType,descID,gpioNumber,gpioLevel,gpioID,pinNumber);
+            return this.right_pin_render2(functionID,pinType,descID,functionNumber,pinLevel,gpioID,pinNumber,pinMode);
           default:
             return null;
         }
@@ -192,26 +217,5 @@ const PinTag = (props) =>
       }
     }
   }
-
-/*****************************************************
- * Input parameters:
- * location:
- *    left
- *    right
- * pinNumber: 1 - 50?
- * gpioNumber: 1 - 30?
- * pinType:
- *    GPIO
- *    IN
- *    OUT
- *    GROUND
- *    3.3V
- *    5V
- *    UART TX
- *    UART RX
- * gpioLevel:
- *    HIGH
- *    LOW
-*/
 
 export default Pin;
