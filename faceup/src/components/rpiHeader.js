@@ -9,6 +9,9 @@ import './pin.css';
 import Pin,{PinParameters}  from "./Pin";
   
 class RpiHeader extends React.Component {
+
+  intervalID;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -70,25 +73,45 @@ class RpiHeader extends React.Component {
       )
   }
 
-  componentDidMount() {
+  getData = () => {
+    // do something to fetch data from a remote API.
     const url = this.urlPre+"0/null";
+    //console.log("get data...");
     this.sendData(url);
+  }
+
+  componentDidMount() {
+    this.getData();
+    this.intervalID = setInterval(this.getData.bind(this), 4000);
+  }
+
+  componentWillUnmount() {
+    /*
+      stop getData() from continuing to run even
+      after unmounting this component
+    */
+    clearInterval(this.intervalID);
   }
 
   handleClick(parameters,clickButton) {
     if(clickButton==="direction"){
       console.log("click button: pin number["+ parameters.pinNumber + "],dirction[" + parameters.pinMode + "]");
       let bcm = this.pin2bcm(parameters.pinNumber);
-      let url = this.urlPre+`${bcm}/cmode`;
-      console.log(url);
-      this.sendData(url);
+      if(bcm!==-1){
+        let url = this.urlPre+`${bcm}/cmode`;
+        console.log(url);
+        this.sendData(url);
+      }
     }
     else if(clickButton==="pin"){
+      // Todo: can not toggle pin level if it is not OUT gpio pin
       console.log("click button: pin number["+ parameters.pinNumber + "]" );
       let bcm = this.pin2bcm(parameters.pinNumber);
-      let url = this.urlPre+`${bcm}/toggle`;
-      console.log(url);
-      this.sendData(url);
+      if(bcm!==-1){
+        let url = this.urlPre+`${bcm}/toggle`;
+        console.log(url);
+        this.sendData(url);
+      }
     }
     else{
       alert("click button: un-supported button type");
@@ -116,7 +139,7 @@ class RpiHeader extends React.Component {
       }
 
       //update pins array with loaded data in items 
-      console.log("data loaded, received data length: " + Object.keys(items).length);
+      //console.log("data loaded, received data length: " + Object.keys(items).length);
       //console.log("pin data length: " + this.pins.length);
       for(i=0;i<Object.keys(items).length;++i){
         //console.log(items[i].name);

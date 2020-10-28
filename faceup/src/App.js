@@ -8,9 +8,10 @@ import RpiHeader from "./components/rpiHeader";
 function App() {
   return (
     <div className="App">
+      
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-
+        <h2>"The full URL of this page is:  {window.location.href}"</h2>
         <RpiHeader information="Left and Right" />
       </header>
     </div>
